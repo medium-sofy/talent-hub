@@ -27,7 +27,7 @@
                         <option value="">All Locations</option>
                         <option value="Cairo">Cairo</option>
                         <option value="Alexandria">Alexandria</option>
-                        <option value="Remote">Remote</option>
+                        <option value="Fayoum">Fayoum</option>
                     </select>
                 </div>
 
