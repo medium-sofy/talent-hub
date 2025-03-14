@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('job_listing_id');
             $table->unsignedBigInteger('candidate_id');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
-            $table->string('contact_email')->nullable();
-            $table->string('contact_phone')->nullable();
-            $table->text('resume_url')->nullable();
+            $table->string('contact_email');
+            $table->string('contact_phone');
+            $table->text('resume_url');
 
             $table->foreign('job_listing_id')->references('id')->on('job_listings')->onDelete('cascade');
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
