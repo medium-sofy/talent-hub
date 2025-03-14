@@ -11,8 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('joblistings', function (Blueprint $table) {
-            $table->id();
+        Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employer_id');
             $table->string('title');
@@ -27,7 +26,6 @@ return new class extends Migration
             $table->unsignedInteger('lower_salary')->nullable();
             $table->dateTime('application_deadline')->nullable();
             $table->boolean('is_approved')->default(false);
-            $table->timestamps();
 
             $table->foreign('employer_id')->references('id')->on('employers')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
@@ -41,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('joblistings');
+        Schema::dropIfExists('job_listings');
     }
 };
