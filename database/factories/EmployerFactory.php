@@ -17,7 +17,11 @@ class EmployerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'company_name' => $this->faker->company,
+            'company_logo_url' => $this->faker->imageUrl(),
+            'website' => $this->faker->url,
+            'description' => $this->faker->paragraph,
         ];
     }
 }
