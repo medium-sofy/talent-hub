@@ -17,7 +17,8 @@ class JoblistingimageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'job_listing_id' => JobListing::factory(),
+            'path' => $this->faker->imageUrl(),
         ];
     }
 }
