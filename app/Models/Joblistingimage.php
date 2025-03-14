@@ -9,4 +9,9 @@ class Joblistingimage extends Model
 {
     /** @use HasFactory<\Database\Factories\JoblistingimageFactory> */
     use HasFactory;
+
+    public function joblisting()
+    {
+        return $this->belongsTo(Joblisting::class);
+    }
 }

@@ -9,4 +9,9 @@ class Skill extends Model
 {
     /** @use HasFactory<\Database\Factories\SkillFactory> */
     use HasFactory;
+
+    public function jobListings()
+    {
+        return $this->belongstoMany(JobListing::class, 'job_listings_skills');
+    }
 }

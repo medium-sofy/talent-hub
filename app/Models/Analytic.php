@@ -9,4 +9,9 @@ class Analytic extends Model
 {
     /** @use HasFactory<\Database\Factories\AnalyticFactory> */
     use HasFactory;
+
+    public function jobListing()
+    {
+        return $this->belongsTo(JobListing::class);
+    }
 }

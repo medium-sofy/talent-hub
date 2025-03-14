@@ -17,7 +17,9 @@ class AnalyticFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'job_listing_id' => JobListing::factory(),
+            'views_count' => $this->faker->numberBetween(0, 1000),
+            'applications_count' => $this->faker->numberBetween(0, 100),
         ];
     }
 }
