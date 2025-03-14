@@ -12,6 +12,6 @@ class Joblistingimage extends Model
 
     public function joblisting()
     {
-        return $this->belongsTo(Joblisting::class);
+        return $this->belongsTo(JobListing::class);
     }
 }
