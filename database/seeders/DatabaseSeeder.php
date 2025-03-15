@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create()->each(function ($user) {
             // Employers & Candidates (Randomly assign some users)
             if (rand(0, 1)) {
-                Employer::factory()->create(['user_id' => $user->id]);
+                Employer::factory(1)->create(['user_id' => $user->id]);
             } else {
-                Candidate::factory()->create(['user_id' => $user->id]);
+                Candidate::factory(1)->create(['user_id' => $user->id]);
             }
         });
 

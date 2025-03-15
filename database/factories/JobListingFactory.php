@@ -8,7 +8,7 @@ use App\Models\Category;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobListing>
  */
-class JoblistingFactory extends Factory
+class JobListingFactory extends Factory
 {
     /**
      * Define the model's default state.
