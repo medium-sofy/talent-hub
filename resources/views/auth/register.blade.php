@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -47,9 +47,12 @@
         {{--    Upload profile pic    --}}
 
         <div class="mt-4">
-            <x-input-label for="profile-picture" :value="'Profile Pic'" />
-            <x-file-input name="profile-picture" id="profile-picture"/>
+            <x-input-label for="profile_picture" :value="'Profile Pic'" />
+            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+            <x-file-input name="profile_picture" id="profile_picture"/>
+
             <x-input-label class="mt-4 mb-2" :value="'What are you looking for?'" />
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
             <div class="flex items-center gap-2">
                 <input type="radio" value="candidate" name="role" onclick="showCandidateFields()" id="candidate">
                 <x-input-label for="candidate" :value="'Looking for jobs '" />
@@ -62,31 +65,39 @@
         </div>
 
 
-        {{--    Candidate specific fields (hidden by default)    --}}
+        {{--    Candidate fields (hidden by default)    --}}
 
         <div id="candidateFields" style="display:none">
             <x-input-label for="resume" class="mt-4" :value="'Upload Resume'" />
             <x-file-input name="resume" id="resume"/>
+            <x-input-error :messages="$errors->get('resume')" class="mt-2" />
 
             <x-input-label for="linkedin_profile" class="mt-4" :value="'linkedIn Profile'" />
             <x-text-input name="linkedin_profile" class="mt-2 w-full" id="linkedin_profile" />
+            <x-input-error :messages="$errors->get('linkedin_profile')" class="mt-2" />
 
             <x-input-label for="phone_number" class="mt-4" :value="'Phone No.'" />
-            <x-text-input name="phone_number" class="mt-2 w-full" id="phone_number" />
+            <input type="tel" name="phone_number" class="mt-2 w-full" id="phone_number" />
+            <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+
         </div>
 
         <div id="employerFields" style="display:none">
             <x-input-label for="company_name" class="mt-4" :value="'Company Name'" />
             <x-text-input name="company_name" class="mt-2 w-full" id="company_name"/>
+            <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
 
-            <x-input-label for="Company_logo" class="mt-4" :value="'Company Logo'" />
-            <x-file-input name="Company_logo" id="Company_logo" />
+            <x-input-label for="company_logo" class="mt-4" :value="'Company Logo'" />
+            <x-file-input name="company_logo" id="company_logo" />
+            <x-input-error :messages="$errors->get('company_logo')" class="mt-2" />
 
-            <x-input-label for="website" class="mt-4" :value="'Company\'s Website'" />
-            <x-text-input name="website" class="mt-2 w-full" id="website" />
+            <x-input-label for="company_website" class="mt-4" :value="'Company\'s Website'" />
+            <x-text-input name="company_website" class="mt-2 w-full" id="company_website" />
+            <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
 
-            <x-input-label for="description" class="mt-4" :value="'Company\'s Description'" />
-            <x-text-input name="description" class="mt-2 w-full" id="description" />
+            <x-input-label for="company_description" class="mt-4" :value="'Company\'s Description'" />
+            <x-text-input name="company_description" class="mt-2 w-full" id="company_description" />
+            <x-input-error :messages="$errors->get('company_description')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

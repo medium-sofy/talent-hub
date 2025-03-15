@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('company_name');
             $table->text('company_logo_url')->nullable();
-            $table->string('website')->nullable();
-            $table->text('description')->nullable();
+            $table->string('company_website')->nullable();
+            $table->text('company_description')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
