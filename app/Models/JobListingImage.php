@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Joblistingimage extends Model
+class JobListingImage extends Model
 {
-    /** @use HasFactory<\Database\Factories\JoblistingimageFactory> */
+    /** @use HasFactory<\Database\Factories\JobListingImageFactory> */
     use HasFactory;
 
     public function joblisting()

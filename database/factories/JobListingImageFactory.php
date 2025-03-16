@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\JobListing;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Joblistingimage>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobListingImage>
  */
-class JoblistingimageFactory extends Factory
+class JobListingImageFactory extends Factory
 {
     /**
      * Define the model's default state.

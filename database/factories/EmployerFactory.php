@@ -20,8 +20,8 @@ class EmployerFactory extends Factory
             'user_id' => User::factory(),
             'company_name' => $this->faker->company,
             'company_logo_url' => $this->faker->imageUrl(),
-            'website' => $this->faker->url,
-            'description' => $this->faker->paragraph,
+            'company_website' => $this->faker->url,
+            'company_description' => $this->faker->paragraph,
         ];
     }
 }
