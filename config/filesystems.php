@@ -47,6 +47,15 @@ return [
             'report' => false,
         ],
 
+        'profile_pic' =>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/profile_pics'),
+            'url' => env('APP_URL').'/storage/images/profile_pics',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

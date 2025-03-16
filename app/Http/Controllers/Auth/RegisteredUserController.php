@@ -35,10 +35,18 @@ class RegisteredUserController extends Controller
 
 //        TODO: Create a filesystem to save user profile pic & CV
 //            TODO: Add profile pic to user
+        $imageName = null;
+
+        if($request->hasFile('profile_picture')) {
+            $image = $request->file('profile_picture');
+            $imageName = $image->store('/', 'profile_pic');
+        }
+
         $user = User::create([
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
             'email' => $request->email,
+            'profile_picture_url'=> $imageName,
             'password' => Hash::make($request->password),
             'role'=>$request->role,
         ]);
