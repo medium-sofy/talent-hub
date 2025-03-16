@@ -36,10 +36,15 @@ class RegisteredUserController extends Controller
 //        TODO: Create a filesystem to save user profile pic & CV
 //            TODO: Add profile pic to user
         $imageName = null;
-
+        $resumeName = null;
         if($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
             $imageName = $image->store('/', 'profile_pic');
+        }
+
+        if($request->hasFile('resume')) {
+            $resume = $request->file('resume');
+            $resumeName = $resume->store('/', 'candidate_resume');
         }
 
         $user = User::create([
@@ -56,6 +61,7 @@ class RegisteredUserController extends Controller
         {
 //            TODO: Add resume to candidate
             $user->candidates()->create([
+                'resume_url' => $resumeName,
                 'linkedin_profile'=>$request->linkedin_profile,
                 'phone_number'=>$request->phone_number,
             ]);
