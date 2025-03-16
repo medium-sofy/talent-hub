@@ -33,12 +33,36 @@ class RegisteredUserController extends Controller
         // the request contains info for both candidates, and employers
         // create the user with required info based on role value
 
+//        TODO: Create a filesystem to save user profile pic & CV
+//            TODO: Add profile pic to user
         $user = User::create([
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role'=>$request->role,
         ]);
+
+
+        if($request->role == 'candidate')
+        {
+//            TODO: Add resume to candidate
+            $user->candidates()->create([
+                'linkedin_profile'=>$request->linkedin_profile,
+                'phone_number'=>$request->phone_number,
+            ]);
+        }
+
+        if($request->role == 'employer')
+        {
+            $user->employers()->create([
+                'company_name'=>$request->company_name,
+                'company_website'=>$request->company_website,
+                'company_description'=>$request->company_description,
+            ]);
+        }
+
+
 
         event(new Registered($user));
 
