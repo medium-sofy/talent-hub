@@ -72,7 +72,11 @@
                     <h4>Resume</h4>
                     <a href="#" class="text-primary"><i class="bi bi-upload"></i></a>
                 </div>
-                <p class="text-muted">No resume uploaded yet</p>
+                @if($user->candidate && $user->candidate->resume_url)
+                    <p><a href="{{ asset($user->candidate->resume_url) }}" target="_blank" download class="btn btn-sm btn-outline-primary"><i class="bi bi-file-earmark-pdf"></i> Download Resume</a></p>
+                @else
+                    <p class="text-muted">No resume uploaded yet</p>
+                @endif
             </div>
 
 
