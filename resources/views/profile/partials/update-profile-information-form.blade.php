@@ -47,6 +47,35 @@
             @endif
         </div>
 
+        <!-- Phone Number -->
+        <div>
+            <x-input-label for="phone_number" :value="__('Phone Number')" />
+            <x-text-input id="phone_number" name="phone_number" type="tel" class="mt-1 block w-full" :value="old('phone_number', $user->candidate->phone_number ?? '')" autocomplete="tel" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
+        </div>
+
+        <!-- LinkedIn Profile -->
+        <div>
+            <x-input-label for="linkedin_profile" :value="__('LinkedIn Profile URL')" />
+            <x-text-input id="linkedin_profile" name="linkedin_profile" type="url" class="mt-1 block w-full" :value="old('linkedin_profile', $user->candidate->linkedin_profile ?? '')" autocomplete="url" placeholder="https://linkedin.com/in/yourusername" />
+            <x-input-error class="mt-2" :messages="$errors->get('linkedin_profile')" />
+        </div>
+
+        <!-- Resume Upload -->
+        <div>
+            <x-input-label for="resume_url" :value="__('Resume')" />
+
+            @if($user->candidate && $user->candidate->resume_url)
+                <div class="mt-2 mb-2">
+                    <a href="{{ $user->candidate->resume_url }}" class="text-blue-600 hover:underline" target="_blank">View Current Resume</a>
+                </div>
+            @endif
+
+            <input id="resume" name="resume" type="file" class="mt-1 block w-full" accept=".pdf,.doc,.docx" />
+            <p class="text-sm text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX</p>
+            <x-input-error class="mt-2" :messages="$errors->get('resume')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
