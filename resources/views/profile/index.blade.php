@@ -33,7 +33,6 @@
 
     <div class="row">
         <div class="col-md-8">
-            <!-- About Section -->
             <div class="section-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>About</h4>
