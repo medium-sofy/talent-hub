@@ -55,6 +55,14 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'resumes' =>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/resumes/'),
+            'url' => env('APP_URL').'/storage/resumes/',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
