@@ -88,4 +88,10 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function show()
+    {
+        $user = Auth::user()->load('candidate');
+        return view('profile.index', compact('user'));
+    }
 }
