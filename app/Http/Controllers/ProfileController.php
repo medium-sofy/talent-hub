@@ -48,8 +48,16 @@ class ProfileController extends Controller
 
         $user->save();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $candidateData = [
+            'user_id' => $user->id,
+            'phone_number' => $validated['phone_number'] ?? null,
+            'linkedin_profile' => $validated['linkedin_profile'] ?? null,
+        ];
+
+        if ($request->hasFile('resume')) {
+            $resumeName = time() . '_' . $user->id . '.' . $request->resume->extension();
+            $request->resume->storeAs('public/resumes', $resumeName);
+            $candidateData['resume_url'] = '/storage/resumes/' . $resumeName;
         }
 
         $request->user()->save();
