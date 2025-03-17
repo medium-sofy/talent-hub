@@ -17,6 +17,21 @@
         @csrf
         @method('patch')
 
+        <!-- Profile Picture -->
+        <div>
+            <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+
+            @if(auth()->user()->profile_picture_url)
+                <div class="mt-2 mb-4">
+                    <img src="{{ auth()->user()->profile_picture_url }}" alt="Profile Picture" class="w-24 h-24 rounded-full object-cover">
+                </div>
+            @endif
+
+            <input id="profile_picture" name="profile_picture" type="file" class="mt-1 block w-full" />
+            <x-input-error class="mt-2" :messages="$errors->get('profile_picture')" />
+        </div>
+
+        <!-- First Name -->
         <div>
             <x-input-label for="f_name" :value="__('First Name')" />
             <x-text-input id="f_name" name="f_name" type="text" class="mt-1 block w-full" :value="old('f_name', $user->f_name)" required autofocus autocomplete="given-name" />
