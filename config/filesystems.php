@@ -60,6 +60,13 @@ return [
             'report' => false,
         ],
 
+        'resume' => [
+            'driver' => 'local',
+            'root' => storage_path('app/resumes'),
+            'url' => env('APP_URL').'/resumes', 
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*
