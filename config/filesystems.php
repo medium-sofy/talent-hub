@@ -56,6 +56,15 @@ return [
             'report' => false,
         ],
 
+        'company_logo' =>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/company_logos'),
+            'url' => env('APP_URL').'/storage/images/company_logos',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         'candidate_resume' =>[
             'driver' => 'local',
             'root' => storage_path('app/public/documents/resumes'),

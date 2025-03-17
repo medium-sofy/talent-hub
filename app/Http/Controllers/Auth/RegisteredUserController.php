@@ -37,6 +37,7 @@ class RegisteredUserController extends Controller
 //            TODO: Add profile pic to user
         $imageName = null;
         $resumeName = null;
+        $companyLogoName = null;
         if($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
             $imageName = $image->store('/', 'profile_pic');
@@ -45,6 +46,11 @@ class RegisteredUserController extends Controller
         if($request->hasFile('resume')) {
             $resume = $request->file('resume');
             $resumeName = $resume->store('/', 'candidate_resume');
+        }
+
+        if($request->hasFile('company_logo')) {
+            $companyLogo = $request->file('company_logo');
+            $companyLogoName = $companyLogo->store('/', 'company_logo');
         }
 
         $user = User::create([
@@ -60,7 +66,7 @@ class RegisteredUserController extends Controller
         if($request->role == 'candidate')
         {
 //            TODO: Add resume to candidate
-            $user->candidates()->create([
+            $user->candidate()->create([
                 'resume_url' => $resumeName,
                 'linkedin_profile'=>$request->linkedin_profile,
                 'phone_number'=>$request->phone_number,
@@ -69,8 +75,9 @@ class RegisteredUserController extends Controller
 
         if($request->role == 'employer')
         {
-            $user->employers()->create([
+            $user->employer()->create([
                 'company_name'=>$request->company_name,
+                'company_logo_url'=>$companyLogoName,
                 'company_website'=>$request->company_website,
                 'company_description'=>$request->company_description,
             ]);

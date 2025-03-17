@@ -4,9 +4,12 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard') }}
             </h2>
-            {{auth()->user()->resume_url}}
-            <a href="{{asset('storage/documents/resumes/'. auth()->user()->candidates->resume_url)}}" class="text-red-400 font-bold">Download Resume</a>
-
+{{--            {{dd(asset('/storage/images/company_logos/'.auth()->user()->employer->company_logo_url))}}--}}
+            <img src="{{asset('/storage/images/company_logos/'. auth()->user()->employer->company_logo_url)}}" width="200px" alt="">
+@if(auth()->user()->role=='candidate')
+                {{auth()->user()->resume_url}}
+                <a href="{{asset('storage/documents/resumes/'. auth()->user()->candidates->resume_url)}}" class="text-red-400 font-bold">Download Resume</a>
+            @endif
         </div>
     </x-slot>
 
