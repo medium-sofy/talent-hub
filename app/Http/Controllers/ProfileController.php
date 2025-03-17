@@ -60,7 +60,10 @@ class ProfileController extends Controller
             $candidateData['resume_url'] = '/storage/resumes/' . $resumeName;
         }
 
-        $request->user()->save();
+        Candidate::updateOrCreate(
+            ['user_id' => $user->id],
+            $candidateData
+        );
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
