@@ -27,11 +27,11 @@ class ProfileController extends Controller
 
         if ($request->hasFile('profile_picture')) {
             if ($user->profile_picture_url) {
-                Storage::delete('public/profile_pictures/' . basename($user->profile_picture_url));
+                Storage::disk('profile_pic')->delete($user->profile_picture_url);
             }
             $imageName = time() . '.' . $request->profile_picture->extension();
-            $request->profile_picture->storeAs('public/profile_pictures', $imageName);
-            $user->profile_picture_url = '/storage/profile_pictures/' . $imageName;
+            $request->profile_picture->storeAs('', $imageName, 'profile_pic');
+            $user->profile_picture_url = $imageName;
         }
 
         $user->f_name = $validated['f_name'];
@@ -52,8 +52,8 @@ class ProfileController extends Controller
 
         if ($request->hasFile('resume')) {
             $resumeName = time() . '_' . $user->id . '.' . $request->resume->extension();
-            $request->resume->storeAs('public/resumes', $resumeName);
-            $candidateData['resume_url'] = '/storage/resumes/' . $resumeName;
+            $request->resume->storeAs('', $resumeName, 'resumes');
+            $candidateData['resume_url'] = $resumeName;
         }
 
         Candidate::updateOrCreate(
