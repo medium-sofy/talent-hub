@@ -52,9 +52,17 @@
                     <a href="#" class="text-primary"><i class="bi bi-pencil"></i></a>
                 </div>
                 <div class="mb-3">
-                    <p class="mb-1"><i class="bi bi-envelope me-2"></i> amroa333@gmail.com</p>
-                    <p class="mb-1 text-muted"><i class="bi bi-phone me-2"></i> Phone not provided</p>
-                    <p class="mb-1 text-muted"><i class="bi bi-linkedin me-2"></i> LinkedIn not provided</p>
+                    <p class="mb-1"><i class="bi bi-envelope me-2"></i> {{ $user->email }}</p>
+                    @if($user->candidate && $user->candidate->phone_number)
+                        <p class="mb-1"><i class="bi bi-phone me-2"></i> {{ $user->candidate->phone_number }}</p>
+                    @else
+                        <p class="mb-1 text-muted"><i class="bi bi-phone me-2"></i> Phone not provided</p>
+                    @endif
+                    @if($user->candidate && $user->candidate->linkedin_profile)
+                        <p class="mb-1"><i class="bi bi-linkedin me-2"></i> <a href="{{ $user->candidate->linkedin_profile }}" target="_blank">LinkedIn Profile</a></p>
+                    @else
+                        <p class="mb-1 text-muted"><i class="bi bi-linkedin me-2"></i> LinkedIn not provided</p>
+                    @endif
                 </div>
             </div>
 
