@@ -11,7 +11,12 @@ class Candidate extends Model
     use HasFactory;
 
     protected $guarded = [];
-
+    protected $fillable = [
+        'user_id',
+        'phone_number',
+        'linkedin_profile',
+        'resume_url'
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);
