@@ -23,6 +23,14 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
+        <!-- Last Name -->
+        <div>
+            <x-input-label for="l_name" :value="__('Last Name')" />
+            <x-text-input id="l_name" name="l_name" type="text" class="mt-1 block w-full" :value="old('l_name', $user->l_name)" required autocomplete="family-name" />
+            <x-input-error class="mt-2" :messages="$errors->get('l_name')" />
+        </div>
+
+        <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
