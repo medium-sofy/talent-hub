@@ -20,7 +20,7 @@
         <div class="bg-cover" style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg');"></div>
         <div class="px-4 pb-4">
             <div class="d-flex align-items-end position-relative" style="margin-top: -75px;">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg" alt="Profile Picture" class="profile-pic me-4">
+                <img src="{{ $user->profile_picture_url ? asset($user->profile_picture_url) : 'https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg' }}" alt="Profile Picture" class="profile-pic me-4">
                 <div class="mt-5">
                     <h2 class="mb-1">{{$users['name']}}</h2>
 
