@@ -25,7 +25,7 @@
                     <h2 class="mb-1">{{ $user->f_name }} {{ $user->l_name }}</h2>
                 </div>
                 <div class="ms-auto position-absolute end-0 top-0 mt-5">
-                    <a href="#" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edit Profile</a>
+                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edit Profile</a>
                 </div>
             </div>
         </div>
