@@ -22,8 +22,7 @@
             <div class="d-flex align-items-end position-relative" style="margin-top: -75px;">
                 <img src="{{ $user->profile_picture_url ? asset($user->profile_picture_url) : 'https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg' }}" alt="Profile Picture" class="profile-pic me-4">
                 <div class="mt-5">
-                    <h2 class="mb-1">{{$users['name']}}</h2>
-
+                    <h2 class="mb-1">{{ $user->f_name }} {{ $user->l_name }}</h2>
                 </div>
                 <div class="ms-auto position-absolute end-0 top-0 mt-5">
                     <a href="#" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edit Profile</a>
