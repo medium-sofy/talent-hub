@@ -38,7 +38,7 @@
                     <h4>About</h4>
                     <a href="{{ route('profile.edit') }}" class="text-primary"><i class="bi bi-pencil"></i></a>
                 </div>
-                <p class="text-muted">{{$users['About']}}</p>
+                <p class="text-muted">{{ $user->about ?? 'I am a web developer' }}</p>
             </div>
 
 
