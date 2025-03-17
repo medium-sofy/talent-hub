@@ -36,7 +36,7 @@
             <div class="section-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>About</h4>
-                    <a href="#" class="text-primary"><i class="bi bi-pencil"></i></a>
+                    <a href="{{ route('profile.edit') }}" class="text-primary"><i class="bi bi-pencil"></i></a>
                 </div>
                 <p class="text-muted">{{$users['About']}}</p>
             </div>
