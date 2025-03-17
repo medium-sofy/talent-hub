@@ -36,18 +36,17 @@
 </head>
 <body class="bg-light">
 <div class="container mt-4 mb-5">
-    <!-- Profile Header -->
     <div class="profile-header mb-4">
         <div class="bg-cover" style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg');"></div>
         <div class="px-4 pb-4">
             <div class="d-flex align-items-end position-relative" style="margin-top: -75px;">
                 <img src="https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg" alt="Profile Picture" class="profile-pic me-4">
                 <div class="mt-5">
-                    <h2 class="mb-1">{{$users['name']}}</h2>
+                    <h2 class="mb-1">{{$user['name']}}</h2>
 
                 </div>
-                <div class="ms-auto position-absolute end-0 top-0 mt-5">
-                    <a href="#" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edit Profile</a>
+                <div class="ms-auto position-absolute end-0 top-20 mt-5">
+                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Edit Profile</a>
                 </div>
             </div>
         </div>
@@ -61,18 +60,15 @@
                     <h4>About</h4>
                     <a href="#" class="text-primary"><i class="bi bi-pencil"></i></a>
                 </div>
-                <p class="text-muted">{{$users['About']}}</p>
+                <p class="text-muted">{{$user['About']}}</p>
             </div>
-
-
         </div>
 
         <div class="col-md-4">
-            <!-- Contact Info -->
             <div class="section-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>Contact Information</h4>
-                    <a href="#" class="text-primary"><i class="bi bi-pencil"></i></a>
+                    <a href="{{ route('profile.edit') }}" class="text-primary"><i class="bi bi-pencil"></i></a>
                 </div>
                 <div class="mb-3">
                     <p class="mb-1"><i class="bi bi-envelope me-2"></i> amroa333@gmail.com</p>
@@ -81,16 +77,13 @@
                 </div>
             </div>
 
-            <!-- Resume -->
             <div class="section-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>Resume</h4>
-                    <a href="#" class="text-primary"><i class="bi bi-upload"></i></a>
+                    <a href="{{ route('profile.edit') }}" class="text-primary"><i class="bi bi-upload"></i></a>
                 </div>
                 <p class="text-muted">No resume uploaded yet</p>
             </div>
-
-
         </div>
     </div>
 </div>
