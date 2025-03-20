@@ -38,3 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/applications/create/{jobId}', [ApplicationController::class, 'create'])->name('applications.create');
     Route::post('/applications/store/{jobId}', [ApplicationController::class, 'store'])->name('applications.store');
 });
+
+
+
+//notification routes
+
+Route::post('/notifications/{notification}/mark-as-read', [ApplicationController::class, 'markAsRead'])
+    ->name('notifications.markAsRead');
