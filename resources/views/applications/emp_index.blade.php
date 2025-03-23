@@ -1,81 +1,112 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-8 text-gray-800">Job Applications</h1>
 
-        <!-- Tabs -->
-        <div class="flex space-x-4 mb-8 border-b border-gray-200">
-            <a href="{{ route('applications.emp_index') }}" class="px-4 py-2 rounded-t-md {{ request('status') ? 'text-gray-500 hover:text-blue-600' : 'text-blue-600 border-b-2 border-blue-600' }}">All</a>
-            <a href="{{ route('applications.emp_index', ['status' => 'pending']) }}" class="px-4 py-2 rounded-t-md {{ request('status') === 'pending' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-blue-600' }}">Pending</a>
-            <a href="{{ route('applications.emp_index', ['status' => 'accepted']) }}" class="px-4 py-2 rounded-t-md {{ request('status') === 'accepted' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-blue-600' }}">Accepted</a>
-            <a href="{{ route('applications.emp_index', ['status' => 'rejected']) }}" class="px-4 py-2 rounded-t-md {{ request('status') === 'rejected' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-blue-600' }}">Rejected</a>
+    <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Job Applications</h1>
+        </div>
+
+
+        <div class="bg-white shadow rounded-lg mb-6">
+            <div class="flex border-b border-gray-200">
+                <a href="{{ route('applications.emp_index') }}" class="px-6 py-3 font-medium text-sm {{ request('status') ? 'text-gray-600' : 'text-blue-600 border-b-2 border-blue-600' }}">
+                    All Applications
+                </a>
+                <a href="{{ route('applications.emp_index', ['status' => 'pending']) }}" class="px-6 py-3 font-medium text-sm {{ request('status') === 'pending' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600' }}">
+                    Pending
+                </a>
+                <a href="{{ route('applications.emp_index', ['status' => 'accepted']) }}" class="px-6 py-3 font-medium text-sm {{ request('status') === 'accepted' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600' }}">
+                    Accepted
+                </a>
+                <a href="{{ route('applications.emp_index', ['status' => 'rejected']) }}" class="px-6 py-3 font-medium text-sm {{ request('status') === 'rejected' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600' }}">
+                    Rejected
+                </a>
+            </div>
         </div>
 
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    @if ($applications->isEmpty())
-        <div class="col-span-full text-center text-gray-500">
-            @if (request('status') === 'pending')
-                No pending applications.
-            @elseif (request('status') === 'accepted')
-                No accepted applications.
-            @elseif (request('status') === 'rejected')
-                No rejected applications.
-            @else
-                No applications found.
-            @endif
-        </div>
-    @else
-        @foreach ($applications as $application)
-            <div class="bg-gradient-to-r from-blue-50 to-purple-50 shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <h2 class="text-xl font-semibold mb-2 text-gray-800">{{ $application->jobListing->title }}</h2>
-                <p class="mb-2 text-gray-600">
-                    <strong>Candidate:</strong> {{ $application->candidate->user->f_name }} {{ $application->candidate->user->l_name }}
-                </p>
-                <p class="mb-2 text-gray-600">
-                    <strong>Status:</strong>
-                    <span class="inline-block px-2 py-1 text-sm rounded
-                        @if($application->status === 'pending') bg-yellow-100 text-yellow-800
-                        @elseif($application->status === 'accepted') bg-green-100 text-green-800
-                        @else bg-red-100 text-red-800
-                        @endif">
-                        {{ $application->status }}
-                    </span>
-                </p>
-                <p class="mb-2 text-gray-600">
-                    <strong>Contact Email:</strong> <a href="mailto:{{ $application->contact_email }}" class="text-blue-600 hover:text-blue-500 hover:underline">{{ $application->contact_email }}</a>
-                </p>
-                <p class="mb-2 text-gray-600">
-                    <strong>Contact Phone:</strong> <a href="tel:{{ $application->contact_phone }}" class="text-blue-600 hover:text-blue-500 hover:underline">{{ $application->contact_phone }}</a>
-                </p>
-                <p class="mb-4 text-gray-600">
-                    <strong>Resume:</strong>
-                    <a href="{{ asset('storage/' . $application->resume_url) }}" target="_blank" class="text-blue-600 hover:text-blue-500 hover:underline">Download Resume</a>
-                </p>
-
-
-                <div class="flex space-x-2">
-                    @if (Auth::user()->role === 'employer' && $application->status === 'pending')
-                        <form action="{{ route('applications.update', $application) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="status" value="accepted">
-                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300">Accept</button>
-                        </form>
-                        <form action="{{ route('applications.update', $application) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="status" value="rejected">
-                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-300">Reject</button>
-                        </form>
+            @if ($applications->isEmpty())
+                <div class="col-span-full bg-white rounded-lg shadow-md p-8 text-center">
+                    @if (request('status') === 'pending')
+                        <p class="text-gray-500 text-lg">No pending applications.</p>
+                    @elseif (request('status') === 'accepted')
+                        <p class="text-gray-500 text-lg">No accepted applications.</p>
+                    @elseif (request('status') === 'rejected')
+                        <p class="text-gray-500 text-lg">No rejected applications.</p>
+                    @else
+                        <p class="text-gray-500 text-lg">No applications found.</p>
                     @endif
                 </div>
-            </div>
-        @endforeach
-    @endif
-</div>
+            @else
+                @foreach ($applications as $application)
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-200">
+
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                            <h2 class="text-xl font-semibold text-gray-800">{{ $application->jobListing->title }}</h2>
+                            <div class="mt-1">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    @if($application->status === 'pending') bg-yellow-100 text-yellow-800
+                                    @elseif($application->status === 'accepted') bg-green-100 text-green-800
+                                    @else bg-red-100 text-red-800
+                                    @endif">
+                                    {{ ucfirst($application->status) }}
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <p class="text-gray-700 font-medium">
+                                    <span class="text-gray-500">Candidate:</span> {{ $application->candidate->user->f_name }} {{ $application->candidate->user->l_name }}
+                                </p>
+                            </div>
+
+
+                            <div class="space-y-3 mb-4">
+                                <div class="flex items-center">
+                                    <span class="text-gray-500 w-32">Email:</span>
+                                    <a href="mailto:{{ $application->contact_email }}" class="text-blue-600 hover:text-blue-700 hover:underline">{{ $application->contact_email }}</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-gray-500 w-32">Phone:</span>
+                                    <a href="tel:{{ $application->contact_phone }}" class="text-blue-600 hover:text-blue-700 hover:underline">{{ $application->contact_phone }}</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-gray-500 w-32">Resume:</span>
+                                    <a href="{{ asset('storage/' . $application->resume_url) }}" target="_blank" class="text-blue-600 hover:text-blue-700 hover:underline">Download Resume</a>
+                                </div>
+                            </div>
+
+
+                            @if (Auth::user()->role === 'employer' && $application->status === 'pending')
+                                <div class="flex space-x-2 pt-4 border-t border-gray-100">
+                                    <form action="{{ route('applications.update', $application) }}" method="POST" class="w-1/2">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="accepted">
+                                        <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-200">
+                                            Accept
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('applications.update', $application) }}" method="POST" class="w-1/2">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="rejected">
+                                        <button type="submit" class="w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors duration-200">
+                                            Reject
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
     </div>
 </div>
 @endsection

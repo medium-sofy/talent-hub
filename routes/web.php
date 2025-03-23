@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +22,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-use App\Http\Controllers\ApplicationController;
 
 
 // Application routes
@@ -43,5 +44,9 @@ Route::middleware('auth')->group(function () {
 
 //notification routes
 
-Route::post('/notifications/{notification}/mark-as-read', [ApplicationController::class, 'markAsRead'])
-    ->name('notifications.markAsRead');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::post('/notifications/{id}/mark-as-unread', [NotificationController::class, 'markAsUnread'])->name('notifications.markAsUnread');
+    Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+});

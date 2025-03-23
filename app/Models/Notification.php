@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Notification extends Model
 {
     use HasFactory;
@@ -23,7 +22,18 @@ class Notification extends Model
         'notifiable_id',
     ];
 
-  
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_read' => 'boolean',
+    ];
+
+    /**
+     * Mark the notification as read.
+     */
     public function markAsRead()
     {
         if (!$this->is_read) {
@@ -31,7 +41,9 @@ class Notification extends Model
         }
     }
 
-    
+    /**
+     * Mark the notification as unread.
+     */
     public function markAsUnread()
     {
         if ($this->is_read) {
@@ -39,22 +51,29 @@ class Notification extends Model
         }
     }
 
-  
-    
+    /**
+     * Check if the notification is read.
+     *
+     * @return bool
+     */
     public function read()
     {
         return $this->is_read;
     }
 
-  
-    
+    /**
+     * Check if the notification is unread.
+     *
+     * @return bool
+     */
     public function unread()
     {
         return !$this->is_read;
     }
 
-   
-    
+    /**
+     * Notification belongs to a user.
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

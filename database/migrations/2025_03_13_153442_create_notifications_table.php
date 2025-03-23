@@ -12,18 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->uuid('id')->primary(); // Use UUID for the primary key
-            $table->string('notifiable_type'); // (e.g., App\Models\User)
-            $table->unsignedBigInteger('notifiable_id'); 
-            $table->text('data'); 
-            $table->timestamp('read_at')->nullable(); 
+            $table->id();
+            $table->unsignedBigInteger('user_id'); 
+            $table->text('message');
+            $table->boolean('is_read')->default(false); // Use `is_read` instead of `read_at`
+            $table->string('notifiable_type');
+            $table->unsignedBigInteger('notifiable_id');
             $table->timestamps();
-        
 
-            $table->index(['notifiable_type', 'notifiable_id']);
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-    
     }
+    
+    
 
     /**
      * Reverse the migrations.

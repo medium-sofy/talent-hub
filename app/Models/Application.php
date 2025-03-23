@@ -23,17 +23,13 @@ class Application extends Model
         'resume_url',
     ];
 
-    /**
-     * Relationship: Application belongs to a JobListing.
-     */
+   
     public function jobListing()
     {
         return $this->belongsTo(JobListing::class);
     }
 
-    /**
-     * Relationship: Application belongs to a Candidate.
-     */
+   
     public function candidate()
     {
         return $this->belongsTo(Candidate::class);

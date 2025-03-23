@@ -40,9 +40,8 @@ class ApplicationController extends Controller
         return view('applications.emp_index', compact('applications'));
     }
 
-    /**
-     * Display a listing of the applications for the logged-in candidate.
-     */
+  
+    
     public function candIndex(Request $request)
     {
 
@@ -136,26 +135,26 @@ class ApplicationController extends Controller
     public function update(Request $request, $id)
     {
         $application = Application::findOrFail($id);
-    
+
         if (Auth::user()->role !== 'employer') {
             return redirect()->route('applications.emp_index')->with('error', 'Unauthorized action.');
         }
-    
+
         $request->validate([
             'status' => 'required|in:accepted,rejected',
         ]);
-    
+
         $oldStatus = $application->status;
         $newStatus = $request->status;
-    
+
         $application->update(['status' => $newStatus]);
-    
+
         // Send notification if the status has changed
         if ($oldStatus !== $newStatus) {
             $candidate = $application->candidate;
             $user = $candidate->user;
-    
 
+            // Create a notification using custom Notification model instead of laravel pure system
             Notification::create([
                 'user_id' => $user->id,
                 'message' => 'Your application for "' . $application->jobListing->title . '" has been ' . $newStatus . '.',
@@ -164,20 +163,8 @@ class ApplicationController extends Controller
                 'notifiable_id' => $user->id,
             ]);
         }
-    
+
         return redirect()->route('applications.emp_index')->with('success', 'Application status updated!');
     }
-    // public function markAsRead($notificationId)
-    // {
-    //     // Ensure the authenticated user is being used
-    //     $user = Auth::user();
-    
-    //     // Find the notification for the authenticated user
-    //     $notification = $user->notifications()->findOrFail($notificationId);
-    
-    //     // Mark the notification as read
-    //     $notification->markAsRead();
-    
-    //     return redirect()->back()->with('success', 'Notification marked as read.');
-    // }
+ 
 }
