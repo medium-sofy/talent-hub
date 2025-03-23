@@ -5,10 +5,13 @@
                 {{ __('Dashboard') }}
             </h2>
 {{--            {{dd(asset('/storage/images/company_logos/'.auth()->user()->employer->company_logo_url))}}--}}
-            <img src="{{asset('/storage/images/company_logos/'. auth()->user()->employer->company_logo_url)}}" width="200px" alt="">
-@if(auth()->user()->role=='candidate')
+            @if(auth()->user()->role=='employer')
+                <img src="{{asset('/storage/images/company_logos/'. auth()->user()->employer->company_logo_url)}}" width="200px" alt="">
+
+            @endif
+            @if(auth()->user()->role=='candidate')
                 {{auth()->user()->resume_url}}
-                <a href="{{asset('storage/documents/resumes/'. auth()->user()->candidates->resume_url)}}" class="text-red-400 font-bold">Download Resume</a>
+                <a href="{{asset('storage/documents/resumes/'. auth()->user()->candidate->resume_url)}}" class="text-red-400 font-bold">Download Resume</a>
             @endif
         </div>
     </x-slot>
