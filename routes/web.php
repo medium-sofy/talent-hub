@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JobListingController::class, 'index']);
+
+Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
