@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobListing;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class JobListingController extends Controller
@@ -12,7 +13,9 @@ class JobListingController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Category::limit(10)->get();
+        $jobs = JobListing::all();
+        return view('jobs.index', compact('jobs', 'tags'));
     }
 
     /**

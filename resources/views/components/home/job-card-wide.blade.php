@@ -1,7 +1,7 @@
 @props(['job'])
-<x-panel class="flex gap-x-6">
+<x-home.panel class="flex gap-x-6">
     <div>
-        <x-employer-logo :employer="$job->employer"/>
+        <x-home.employer-logo :employer="$job->employer"/>
     </div>
     <div class="flex-1 flex flex-col">
         <a href="" class="self-start text-sm text-gray-400">{{ $job->employer->name }}</a>
@@ -10,13 +10,14 @@
                 {{ $job->title }}
             </a>
         </h3>
-        <p class="text-sm text-gray-400 mt-auto">{{ $job->schedule }} - {{ $job->salary }}</p>
+        <p class="text-sm text-gray-400 mt-auto">{{ $job->job_type }} - {{ $job->lower_salary }} to {{ $job->upper_salary }} EGP</p>
     </div>
     <div>
 
-        @foreach ($job->tags as $tag)
-            <x-tag :$tag />
-        @endforeach
+        @php
+            $tag = $job->category
+        @endphp
+        <x-home.tag :$tag/>
 
     </div>
-</x-panel>
+</x-home.panel>
