@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegistrationRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -27,29 +28,67 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegistrationRequest $request): RedirectResponse
     {
-        // Validate the request data
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        // the request contains info for both candidates, and employers
+        // create the user with required info based on role value
 
-        // Create the user
+//        TODO: Create a filesystem to save user profile pic & CV
+//            TODO: Add profile pic to user
+        $imageName = null;
+        $resumeName = null;
+        $companyLogoName = null;
+        if($request->hasFile('profile_picture')) {
+            $image = $request->file('profile_picture');
+            $imageName = $image->store('/', 'profile_pic');
+        }
+
+        if($request->hasFile('resume')) {
+            $resume = $request->file('resume');
+            $resumeName = $resume->store('/', 'candidate_resume');
+        }
+
+        if($request->hasFile('company_logo')) {
+            $companyLogo = $request->file('company_logo');
+            $companyLogoName = $companyLogo->store('/', 'company_logo');
+        }
+
         $user = User::create([
-            'name' => $request->name,
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
             'email' => $request->email,
+            'profile_picture_url'=> $imageName,
             'password' => Hash::make($request->password),
+            'role'=>$request->role,
         ]);
 
-        // Fire the Registered event
+
+        if($request->role == 'candidate')
+        {
+//            TODO: Add resume to candidate
+            $user->candidate()->create([
+                'resume_url' => $resumeName,
+                'linkedin_profile'=>$request->linkedin_profile,
+                'phone_number'=>$request->phone_number,
+            ]);
+        }
+
+        if($request->role == 'employer')
+        {
+            $user->employer()->create([
+                'company_name'=>$request->company_name,
+                'company_logo_url'=>$companyLogoName,
+                'company_website'=>$request->company_website,
+                'company_description'=>$request->company_description,
+            ]);
+        }
+
+
+
         event(new Registered($user));
 
-        // Log in the user
         Auth::login($user);
 
-        // Redirect to the dashboard
         return redirect(route('dashboard', absolute: false));
     }
 }
