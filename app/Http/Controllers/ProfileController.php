@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -34,6 +35,18 @@ class ProfileController extends Controller
             $user->profile_picture_url = $imageName;
         }
 
+        // Generate slug from full name
+        $fullName = trim($validated['f_name'] . ' ' . $validated['l_name']);
+        $slug = Str::slug($fullName);
+
+        // Ensure unique slug
+        $originalSlug = $slug;
+        $counter = 1;
+        while (Candidate::where('slug', $slug)->where('user_id', '!=', $user->id)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
         $user->f_name = $validated['f_name'];
         $user->l_name = $validated['l_name'];
         $user->email = $validated['email'];
@@ -48,6 +61,7 @@ class ProfileController extends Controller
             'user_id' => $user->id,
             'phone_number' => $validated['phone_number'] ?? null,
             'linkedin_profile' => $validated['linkedin_profile'] ?? null,
+            'slug' => $slug, // Add slug to candidate data
         ];
 
         if ($request->hasFile('resume')) {
@@ -83,5 +97,13 @@ class ProfileController extends Controller
     {
         $user = Auth::user()->load('candidate');
         return view('profile.index', compact('user'));
+    }
+
+    // New method to show profile by slug
+    public function showBySlug(string $slug)
+    {
+        $candidate = Candidate::where('slug', $slug)->firstOrFail();
+        $user = $candidate->user;
+        return view('profile.index', compact('user', 'candidate'));
     }
 }
