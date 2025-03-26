@@ -30,7 +30,7 @@ class ApplicationStatusUpdated extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database']; // Store the notification in the database
+        return ['database']; 
     }
 
     /**

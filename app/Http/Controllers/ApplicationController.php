@@ -147,6 +147,7 @@ class ApplicationController extends Controller
             $candidate = $application->candidate;
             $user = $candidate->user;
 
+      // Create a notification using custom Notification model instead of laravel pure system
             Notification::create([
                 'user_id' => $user->id,
                 'message' => 'Your application for "' . $application->jobListing->title . '" has been ' . $newStatus . '.',
