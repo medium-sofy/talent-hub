@@ -62,6 +62,24 @@ return [
             'report' => false,
         ],
 
+        'company_logo' =>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/company_logos'),
+            'url' => env('APP_URL').'/storage/images/company_logos',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'candidate_resume' =>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/documents/resumes'),
+            'url' => env('APP_URL').'/storage/documents/resumes',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -73,6 +91,13 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
             'report' => false,
+        ],
+
+        'resume' => [
+            'driver' => 'local',
+            'root' => storage_path('app/resumes'),
+            'url' => env('APP_URL').'/resumes', 
+            'visibility' => 'public',
         ],
 
     ],

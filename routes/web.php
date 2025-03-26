@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,7 +20,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile-edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 require __DIR__.'/auth.php';
 
+
+
+
+// Application routes
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/employer/applications', [ApplicationController::class, 'empIndex'])->name('applications.emp_index');
+
+
+    Route::get('/candidate/applications', [ApplicationController::class, 'candIndex'])->name('applications.cand_index');
+
+
+    Route::resource('applications', ApplicationController::class)->except(['create', 'store']);
+
+    Route::get('/applications/create/{jobId}', [ApplicationController::class, 'create'])->name('applications.create');
+    Route::post('/applications/store/{jobId}', [ApplicationController::class, 'store'])->name('applications.store');
+});
+
+
+
+//notification routes
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::post('/notifications/{id}/mark-as-unread', [NotificationController::class, 'markAsUnread'])->name('notifications.markAsUnread');
+    Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+});

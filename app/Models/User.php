@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Candidate;
+use App\Models\Notification; // Add this import
+
 
 class User extends Authenticatable
 {
@@ -48,7 +50,7 @@ class User extends Authenticatable
         return $this->hasOne(Employer::class);
     }
 
-    public function candidate()
+    public function candidates()
     {
         return $this-> hasOne(Candidate::class);
     }
