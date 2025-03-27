@@ -23,7 +23,8 @@ class JobListingController extends Controller
      */
     public function create()
     {
-        return view('jobs.create');
+        $categories = Category::all();
+        return view('jobs.create', compact('categories'));
     }
 
     /**
@@ -31,7 +32,7 @@ class JobListingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(request()->all());
     }
 
     /**
