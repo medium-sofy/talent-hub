@@ -7,7 +7,7 @@
 
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
                 <div class="mb-4 md:mb-0">
-                <h1 class="text-3xl font-bold text-white">My Applications</h1>       
+                <h1 class="text-3xl font-bold text-white">My Applications</h1>
                              <p class="text-gray-400 mt-2">Track and manage your job applications</p>
                 </div>
 
@@ -26,7 +26,7 @@
                         </div>
                     </button>
 
-
+                    <!-- Notification Panel -->
                     <div id="notificationPanel" class="hidden absolute right-0 mt-2 w-80 bg-gray-900 rounded-lg shadow-xl z-50 border border-gray-700 divide-y divide-gray-700 max-h-[80vh] overflow-y-auto">
                         <div class="px-4 py-3 flex justify-between items-center bg-gray-900 sticky top-0 z-10">
                             <h3 class="font-medium">Notifications</h3>
@@ -86,8 +86,17 @@
                     </div>
                 </div>
             </div>
-
-
+            @if($applications->isEmpty())
+    <div class="text-center py-12">
+        <p class="text-gray-400">You haven't applied to any jobs yet.</p>
+    </div>
+@else
+    <!-- Your existing applications grid code here -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- ... your existing application cards ... -->
+    </div>
+@endif
+            <!-- Applications Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($applications as $application)
                 <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg group">
@@ -128,7 +137,7 @@
                         </div>
 
                         <div class="mt-6 flex space-x-3">
-                            <button onclick="openModal('modal-{{ $application->id }}')" 
+                            <button onclick="openModal('modal-{{ $application->id }}')"
                                     class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200 text-sm font-medium flex items-center justify-center">
                                 <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -140,7 +149,7 @@
                             <form action="{{ route('applications.destroy', $application) }}" method="POST" class="flex-1">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" 
+                                <button type="submit"
                                         class="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition-colors duration-200 text-sm font-medium flex items-center justify-center">
                                     <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -154,7 +163,7 @@
                 </div>
 
                 <!-- Application Modal -->
-                <div id="modal-{{ $application->id }}" 
+                <div id="modal-{{ $application->id }}"
                      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 hidden p-4">
                     <div class="bg-gray-900 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
                         <div class="p-6">
@@ -163,7 +172,7 @@
                                     <h2 class="text-2xl font-bold text-white">{{ $application->jobListing->title }}</h2>
                                     <p class="text-blue-400 mt-1">{{ $application->jobListing->employer->company_name }}</p>
                                 </div>
-                                <button onclick="closeModal('modal-{{ $application->id }}')" 
+                                <button onclick="closeModal('modal-{{ $application->id }}')"
                                         class="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-800">
                                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -221,13 +230,13 @@
                                 <form action="{{ route('applications.destroy', $application) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" 
+                                    <button type="submit"
                                             class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors duration-200 text-sm font-medium">
                                         Cancel Application
                                     </button>
                                 </form>
                                 @endif
-                                <button onclick="closeModal('modal-{{ $application->id }}')" 
+                                <button onclick="closeModal('modal-{{ $application->id }}')"
                                         class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition-colors duration-200 text-sm font-medium">
                                     Close
                                 </button>

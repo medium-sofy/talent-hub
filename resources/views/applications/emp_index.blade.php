@@ -104,12 +104,12 @@
                                     <a href="tel:{{ $application->contact_phone }}" class="text-white hover:text-gray-300 hover:underline">{{ $application->contact_phone }}</a>
                                 </div>
                             </div>
-                            
-                            <a href="{{ asset('storage/documents/resumes/' . basename($application->resume_url)) }}" 
-                               target="_blank" 
-                               class="flex items-center justify-center bg-gray-900 text-white w-full py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 mb-4">
-                               Download Resume
-                            </a>
+
+                            <a href="{{ asset('storage/' . $application->resume_url) }}"
+   target="_blank"
+   class="flex items-center justify-center bg-gray-900 text-white w-full py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 mb-4">
+   Download Resume
+</a>
 
                             @if (Auth::user()->role === 'employer' && $application->status === 'pending')
                                 <div class="flex space-x-2">
