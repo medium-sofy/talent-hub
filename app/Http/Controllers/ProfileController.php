@@ -104,6 +104,6 @@ class ProfileController extends Controller
     {
         $candidate = Candidate::where('slug', $slug)->firstOrFail();
         $user = $candidate->user;
-        return view('profile.index', compact('user', 'candidate'));
+        return view('profile.profile', compact('user', 'candidate'));
     }
 }
