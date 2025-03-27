@@ -36,7 +36,7 @@ class ApplicationController extends Controller
 
         return view('applications.emp_index', compact('applications'));
     }
-    
+
     public function candIndex(Request $request)
     {
         if (Auth::user()->role !== 'candidate') {
@@ -93,7 +93,8 @@ class ApplicationController extends Controller
         ]);
 
         if ($request->hasFile('resume')) {
-            $resumePath = $request->file('resume')->store('resumes', 'public');
+            $resumePath = $request->file('resume')->store('', 'candidate_resume'); 
+            $resumeUrl = 'documents/resumes/'.basename($resumePath);
         } else {
             return redirect()->back()->withErrors(['resume' => 'Resume file is required.']);
         }
@@ -104,7 +105,7 @@ class ApplicationController extends Controller
             'status' => 'pending',
             'contact_email' => $validatedData['contact_email'],
             'contact_phone' => $validatedData['contact_phone'],
-            'resume_url' => $resumePath,
+            'resume_url' => $resumeUrl, 
         ]);
 
         return redirect()->route('applications.cand_index')->with('success', 'Application submitted successfully!');
@@ -147,6 +148,7 @@ class ApplicationController extends Controller
             $candidate = $application->candidate;
             $user = $candidate->user;
 
+      // Create a notification using custom Notification model instead of laravel pure system
             Notification::create([
                 'user_id' => $user->id,
                 'message' => 'Your application for "' . $application->jobListing->title . '" has been ' . $newStatus . '.',

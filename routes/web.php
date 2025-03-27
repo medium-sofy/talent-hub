@@ -1,13 +1,15 @@
 <?php
 
+use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\NotificationController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [JobListingController::class, 'index'])->name('home');
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
