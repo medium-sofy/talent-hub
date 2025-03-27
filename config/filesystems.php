@@ -43,14 +43,20 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
         ],
 
         'profile_pic' =>[
             'driver' => 'local',
             'root' => storage_path('app/public/images/profile_pics'),
             'url' => env('APP_URL').'/storage/images/profile_pics',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+        'resumes' =>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/resumes/'),
+            'url' => env('APP_URL').'/storage/resumes/',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
