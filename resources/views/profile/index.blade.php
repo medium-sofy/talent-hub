@@ -49,7 +49,7 @@
             <div class="section-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>Contact Information</h4>
-                    <a href="#" class="text-primary"><i class="bi bi-pencil"></i></a>
+                    <a href="{{ route('profile.edit') }}" class="text-primary"><i class="bi bi-pencil"></i></a>
                 </div>
                 <div class="mb-3">
                     <p class="mb-1"><i class="bi bi-envelope me-2"></i> {{ $user->email }}</p>
@@ -72,7 +72,7 @@
             <div class="section-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>Resume</h4>
-                    <a href="#" class="text-primary"><i class="bi bi-upload"></i></a>
+                    <a href="#" class="text-primary"><i class=""></i></a>
                 </div>
                 @if($user->candidate && $user->candidate->resume_url)
                     <p><a href="{{ asset('/storage/resumes/'.$user->candidate->resume_url) }}" target="_blank" download class="btn btn-sm btn-outline-primary"><i class="bi bi-file-earmark-pdf"></i> Download Resume</a></p>
