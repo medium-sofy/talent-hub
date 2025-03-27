@@ -5,9 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [JobListingController::class, 'index'])->name('home');
+Route::get('/', [JobListingController::class, 'index'])->name('jobs.index');
 
-Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/search', [SearchController::class, 'search'])->name('jobs.search');
 
 Route::get('/jobs/create', [JobListingController::class, 'create'])->name('jobs.create');
 Route::post('/jobs', [JobListingController::class, 'store'])->name('jobs.store');

@@ -33,9 +33,8 @@ class JobListingController extends Controller
      */
     public function store(PostJobRequest $request)
     {
-//        dd(auth()->user()->employer->id);
-//        dd($request->validated());
         JobListing::create([...$request->validated(), 'employer_id'=>auth()->user()->employer->id]);
+        return redirect()->route('jobs.index');
     }
 
     /**
