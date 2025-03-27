@@ -9,6 +9,8 @@ Route::get('/', [JobListingController::class, 'index'])->name('home');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
+Route::get('/jobs/create', [JobListingController::class, 'create'])->name('jobs.create');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
