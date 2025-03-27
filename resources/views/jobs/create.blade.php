@@ -8,9 +8,9 @@
 
         <x-forms.input label='Location' name='location' placeholder="Winter Park, Florida"/>
         <x-forms.select label="Workplace type" name="workplace">
-            <option>Remote</option>
-            <option>On-Site</option>
-            <option>Hybrid</option>
+            <option value="Remote">Remote</option>
+            <option value="On-site">On-Site</option>
+            <option value="Hybrid">Hybrid</option>
         </x-forms.select>
         <x-forms.input label='Lower salary range' name='lower_salary' placeholder="15,000 EGP"/>
         <x-forms.input label='Upper salary range' name='upper_salary' placeholder="10,000 EGP"/>
@@ -23,9 +23,9 @@
         <x-forms.input type="date" label='Deadline' name='application_deadline' />
 
         <x-forms.select label="Schedule" name="job_type">
-            <option>Part Time</option>
-            <option>Full Time</option>
-            <option>Freelance</option>
+            <option value="Part-time">Part Time</option>
+            <option value="Full-time">Full Time</option>
+            <option value="Freelance">Freelance</option>
         </x-forms.select>
         <x-forms.divider/>
 {{--        <x-forms.input label='Tags(comma seperated)' name='tags' placeholder="Front-End, Backend, PHP"/>--}}
