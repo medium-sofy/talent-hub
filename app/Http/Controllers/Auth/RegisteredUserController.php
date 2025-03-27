@@ -89,7 +89,7 @@ class RegisteredUserController extends Controller
 
         return redirect(route('dashboard', absolute: false));
     }
-  
+
     /**
      * Create a unique slug for the candidate
      */
@@ -107,7 +107,4 @@ class RegisteredUserController extends Controller
 
         return $slug;
     }
-  
-  
-  
 }
