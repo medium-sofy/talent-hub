@@ -13,6 +13,6 @@ class SearchController extends Controller
 //            ->with('employer', 'category')
             ->where('title', 'LIKE', '%' . request('q') . '%')
             ->get();
-        return view('jobs.results', ['jobs' => $jobs]);
+        return view('home.results', ['home' => $jobs]);
     }
 }

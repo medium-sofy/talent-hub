@@ -33,7 +33,6 @@
 
                 <form action="/logout" method="POST">
                     @csrf
-                    @method("DELETE")
                     <button>Log Out</button>
                 </form>
             </div>

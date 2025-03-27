@@ -9,8 +9,8 @@ Route::get('/', [JobListingController::class, 'index'])->name('jobs.index');
 
 Route::get('/search', [SearchController::class, 'search'])->name('jobs.search');
 
-Route::get('/jobs/create', [JobListingController::class, 'create'])->name('jobs.create');
-Route::post('/jobs', [JobListingController::class, 'store'])->name('jobs.store');
+Route::get('/home/create', [JobListingController::class, 'create'])->name('jobs.create');
+Route::post('/home', [JobListingController::class, 'store'])->name('jobs.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
