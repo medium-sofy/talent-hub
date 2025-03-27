@@ -93,9 +93,8 @@ class ApplicationController extends Controller
         ]);
 
         if ($request->hasFile('resume')) {
-            // Store in the correct disk and get the path
-            $resumePath = $request->file('resume')->store('', 'candidate_resume'); // Store in root of the configured path
-            $resumeUrl = 'documents/resumes/'.basename($resumePath); // Relative path for storage
+            $resumePath = $request->file('resume')->store('', 'candidate_resume'); 
+            $resumeUrl = 'documents/resumes/'.basename($resumePath);
         } else {
             return redirect()->back()->withErrors(['resume' => 'Resume file is required.']);
         }
@@ -106,7 +105,7 @@ class ApplicationController extends Controller
             'status' => 'pending',
             'contact_email' => $validatedData['contact_email'],
             'contact_phone' => $validatedData['contact_phone'],
-            'resume_url' => $resumeUrl, // Store relative path
+            'resume_url' => $resumeUrl, 
         ]);
 
         return redirect()->route('applications.cand_index')->with('success', 'Application submitted successfully!');
