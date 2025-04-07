@@ -6,6 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+<<<<<<< HEAD
+=======
+use App\Models\Candidate;
+use App\Models\Notification; // Add this import
+
+>>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 
 class User extends Authenticatable
 {
@@ -42,7 +48,11 @@ class User extends Authenticatable
         ];
     }
 
+<<<<<<< HEAD
     public function employer()
+=======
+    public function employers()
+>>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     {
         return $this->hasOne(Employer::class);
     }
@@ -52,7 +62,11 @@ class User extends Authenticatable
         return $this-> hasOne(Candidate::class);
     }
 
+<<<<<<< HEAD
     public function comment()
+=======
+    public function comments()
+>>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     {
         return $this-> hasMany(Comment::class);
     }
