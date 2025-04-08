@@ -43,11 +43,8 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-<<<<<<< HEAD
             'throw' => false,
             'report' => false,
-=======
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
         ],
 
         'profile_pic' =>[
@@ -58,17 +55,6 @@ return [
             'throw' => false,
             'report' => false,
         ],
-<<<<<<< HEAD
-=======
-        'resumes' =>[
-            'driver' => 'local',
-            'root' => storage_path('app/public/resumes/'),
-            'url' => env('APP_URL').'/storage/resumes/',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 
         'company_logo' =>[
             'driver' => 'local',
@@ -101,16 +87,13 @@ return [
             'report' => false,
         ],
 
-<<<<<<< HEAD
-=======
         'resume' => [
             'driver' => 'local',
             'root' => storage_path('app/resumes'),
-            'url' => env('APP_URL').'/resumes', 
+            'url' => env('APP_URL').'/resumes',
             'visibility' => 'public',
         ],
 
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     ],
 
     /*

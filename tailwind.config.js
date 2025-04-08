@@ -1,9 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
-<<<<<<< HEAD
-=======
 import tailwindcss from '@tailwindcss/vite'
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -21,12 +18,8 @@ export default {
         },
     },
 
-<<<<<<< HEAD
-    plugins: [forms],
-=======
     plugins: [
         forms,
     ]
 
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 };

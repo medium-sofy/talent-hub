@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-<<<<<<< HEAD
-    /** @use HasFactory<\Database\Factories\ApplicationFactory> */
-    use HasFactory;
-
-=======
     use HasFactory;
 
     /**
@@ -29,16 +24,11 @@ class Application extends Model
     ];
 
    
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     public function jobListing()
     {
         return $this->belongsTo(JobListing::class);
     }
 
-<<<<<<< HEAD
-=======
-   
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     public function candidate()
     {
         return $this->belongsTo(Candidate::class);

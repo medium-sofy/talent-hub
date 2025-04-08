@@ -2,19 +2,6 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Notification extends Model
-{
-    /** @use HasFactory<\Database\Factories\NotificationFactory> */
-    use HasFactory;
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-=======
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -98,6 +85,5 @@ class Notification extends Model
     public function notifiable()
     {
         return $this->morphTo();
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     }
 }
