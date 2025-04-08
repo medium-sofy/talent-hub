@@ -10,6 +10,7 @@ class JobListing extends Model
     /** @use HasFactory<\Database\Factories\JobListingFactory> */
     use HasFactory;
 
+    protected $guarded = [];
     public function employer()
     {
         return $this->belongsTo(Employer::class);

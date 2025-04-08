@@ -1,21 +1,34 @@
-<x-layout>
-    <x-page-heading>New Job</x-page-heading>
+<x-home.layout>
+    <x-home.page-heading>New Job</x-home.page-heading>
     <x-forms.form method="POST" action='/jobs'>
         <x-forms.input label='Title' name='title' placeholder="CEO"/>
-        <x-forms.input label='Salary' name='salary' placeholder="$90,000"/>
+        <x-forms.input label='Description' name='description' placeholder="Manage executive tasks"/>
+        <x-forms.input label='Requirements' name='requirements' placeholder="Job prerequisites"/>
+        <x-forms.input label='Benefits' name='benefits' placeholder="CEO"/>
+
         <x-forms.input label='Location' name='location' placeholder="Winter Park, Florida"/>
-
-        <x-forms.select label="Schedule" name="schedule">
-            <option>Part Time</option>
-            <option>Full Time</option>
+        <x-forms.select label="Workplace type" name="workplace">
+            <option value="Remote">Remote</option>
+            <option value="On-site">On-Site</option>
+            <option value="Hybrid">Hybrid</option>
         </x-forms.select>
+        <x-forms.input label='Lower salary range' name='lower_salary' placeholder="15,000 EGP"/>
+        <x-forms.input label='Upper salary range' name='upper_salary' placeholder="10,000 EGP"/>
+        <x-forms.select label="Category" name="category_id">
+            <option value="" selected>Choose a category</option>
+            @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </x-forms.select>
+        <x-forms.input type="date" label='Deadline' name='application_deadline' />
 
-        <x-forms.input label='Url' name='url' placeholder="https://acme.com/jobs/ceo-wanted"/>
-        <x-forms.checkbox label="Featured (Costs Extra)" name="featured"/>
-
+        <x-forms.select label="Schedule" name="job_type">
+            <option value="Part-time">Part Time</option>
+            <option value="Full-time">Full Time</option>
+            <option value="Freelance">Freelance</option>
+        </x-forms.select>
         <x-forms.divider/>
-
-        <x-forms.input label='Tags(comma seperated)' name='tags' placeholder="Front-End, Backend, PHP"/>
+{{--        <x-forms.input label='Tags(comma seperated)' name='tags' placeholder="Front-End, Backend, PHP"/>--}}
         <x-forms.button class="mt-6">Publish</x-forms.button>
     </x-forms.form>
-</x-layout>
+</x-home.layout>

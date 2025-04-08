@@ -25,7 +25,7 @@ class JobListingFactory extends Factory
             'benefits' => $this->faker->paragraph,
             'location' => $this->faker->city,
             'category_id' => Category::factory(),
-            'workplace' => $this->faker->randomElement(['remote', 'onsite', 'hybrid']),
+            'workplace' => $this->faker->randomElement(['Remote', 'On-site', 'Hybrid']),
             'job_type' => $this->faker->randomElement(['Full-time', 'Part-time', 'freelance']),
             'upper_salary' => $this->faker->numberBetween(12000, 25000),
             'lower_salary' => $this->faker->numberBetween(5000, 10000),

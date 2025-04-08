@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\jobs\PostJobRequest;
 use App\Models\JobListing;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -23,15 +24,17 @@ class JobListingController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('jobs.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostJobRequest $request)
     {
-        //
+        JobListing::create([...$request->validated(), 'employer_id'=>auth()->user()->employer->id]);
+        return redirect()->route('jobs.index');
     }
 
     /**

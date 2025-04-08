@@ -1,72 +1,62 @@
-<x-guest-layout>
+<x-home.layout>
+    <x-home.page-heading>Register</x-home.page-heading>
     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
-        <div>
-            <x-input-label for="f_name" :value="__('First Name')" />
-            <x-text-input id="f_name" class="block mt-1 w-full" type="text" name="f_name" :value="old('f_name')" required autofocus autocomplete="f_name" />
-            <x-input-error :messages="$errors->get('f_name')" class="mt-2" />
-        </div>
-        <div>
-            <x-input-label for="l_name" :value="__('Last Name')" />
-            <x-text-input id="l_name" class="block mt-1 w-full" type="text" name="l_name" :value="old('l_name')" required autofocus autocomplete="l_name" />
-            <x-input-error :messages="$errors->get('l_name')" class="mt-2" />
-        </div>
 
+        <x-forms.input label="First Name" name="f_name" />
+
+        <x-forms.input label="Last Name" name="l_name"/>
         <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+
+        <x-forms.input label="Email" name="email"/>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
 
+        <x-forms.input label="Password" name="password" type="password"/>
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
 
+        <x-forms.input label="Confirm Password" name="password_confirmation" type="password" />
         <!-- Upload profile pic -->
         <div class="mt-4">
-            <x-input-label for="profile_picture" :value="'Profile Pic'" />
-            <x-file-input name="profile_picture" id="profile_picture" />
-            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+            <x-forms.label name="profile_picture" label="Profile Picture"/>
+            <div class="relative w-full">
+                <label for="profile_picture" class="w-full flex items-center justify-center bg-blue-500 hover:bg-blue-400 border border-gray-500 rounded-md py-3 px-4 cursor-pointer">
+                    <span class="profile-picture-name">Choose Profile Pic</span>
+                </label>
+                <input id="profile_picture" name="profile_picture" type="file" class="absolute left-0 top-0 opacity-0" onchange="updateFileName('profile_picture', 'profile-picture-name')"/>
+            </div>
 
-            <x-input-label class="mt-4 mb-2" :value="'What are you looking for?'" />
+{{--      Role choosing      --}}
+            <x-forms.label label="What are you looking for?" class="mt-4 mb-2"/>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
             <div class="flex items-center gap-2">
                 <input type="radio" value="candidate" name="role" onclick="showCandidateFields()" id="candidate" {{ old('role') == 'candidate' ? 'checked' : '' }}>
-                <x-input-label for="candidate" :value="'Looking for jobs '" />
+                <x-forms.label name="candidate" label="Looking for Jobs" :square="false"/>
             </div>
 
             <div class="flex items-center gap-2 mt-2">
                 <input type="radio" value="employer" name="role" onclick="showEmployerFields()" id="employer" {{ old('role') == 'employer' ? 'checked' : '' }}>
-                <x-input-label for="employer" :value="'Looking for talent '" />
+                <x-forms.label name="employer" label="Looking for talent" :square="false"/>
+
             </div>
         </div>
 
         <!-- Candidate fields -->
         <div id="candidateFields" style="display: {{ old('role') == 'candidate' ? 'block' : 'none' }}">
-            <x-input-label for="resume" class="mt-4" :value="'Upload Resume'" />
-            <x-file-input name="resume" id="resume" />
+            <x-forms.label name="resume" label="Upload Resume" class="mt-4"/>
+            <div class="relative w-full">
+                <label for="resume" class="w-full mb-4 flex items-center justify-center bg-blue-500 hover:bg-blue-400 border border-gray-500 rounded-md py-3 px-4 cursor-pointer">
+                    <span class="resume-name">Choose Resume</span>
+                </label>
+                <input id="resume" name="resume" type="file" class="absolute left-0 top-0 opacity-0" onchange="updateFileName('resume', 'resume-name')"/>
+            </div>
             <x-input-error :messages="$errors->get('resume')" class="mt-2" />
 
-            <x-input-label for="linkedin_profile" class="mt-4" :value="'LinkedIn Profile'" />
-            <x-text-input name="linkedin_profile" class="mt-2 w-full" id="linkedin_profile" :value="old('linkedin_profile')" />
-            <x-input-error :messages="$errors->get('linkedin_profile')" class="mt-2" />
+            <x-forms.input label="LinkedIn Profile" name="linkedin_profile" class="mb-4"/>
 
-            <x-input-label for="phone_number" class="mt-4" :value="'Phone No.'" />
-            <input type="tel" name="phone_number" class="mt-2 w-full" id="phone_number" value="{{ old('phone_number') }}" />
-            <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+            <x-forms.input label="Phone No." name="phone_number" type="tel" />
         </div>
 
         <!-- Employer fields -->
@@ -106,5 +96,16 @@
             document.getElementById("candidateFields").style.display = "block";
             document.getElementById("employerFields").style.display = "none";
         }
+
+        function updateFileName(inputName, fileName) {
+            const input = document.getElementById(inputName);
+            const fileNameDisplay = document.querySelector('.'+fileName);
+
+            if (input.files.length > 0) {
+                fileNameDisplay.textContent = input.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'Choose File';
+            }
+        }
     </script>
-</x-guest-layout>
+</x-home.layout>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('benefits')->nullable();
             $table->string('location');
             $table->unsignedBigInteger('category_id');
-            $table->enum('workplace', ['remote', 'onsite', 'hybrid']);
+            $table->enum('workplace', ['Remote', 'On-site', 'Hybrid']);
             $table->enum('job_type', ['Full-time', 'Part-time', 'freelance']);
             $table->unsignedInteger('upper_salary')->nullable();
             $table->unsignedInteger('lower_salary')->nullable();
