@@ -5,6 +5,12 @@
                 {{ __('Dashboard') }}
             </h2>
 {{--            {{dd(asset('/storage/images/company_logos/'.auth()->user()->employer->company_logo_url))}}--}}
+<<<<<<< HEAD
+            <img src="{{asset('/storage/images/company_logos/'. auth()->user()->employer->company_logo_url)}}" width="200px" alt="">
+@if(auth()->user()->role=='candidate')
+                {{auth()->user()->resume_url}}
+                <a href="{{asset('storage/documents/resumes/'. auth()->user()->candidates->resume_url)}}" class="text-red-400 font-bold">Download Resume</a>
+=======
             @if(auth()->user()->role=='employer')
                 <img src="{{asset('/storage/images/company_logos/'. auth()->user()->employer->company_logo_url)}}" width="200px" alt="">
 
@@ -12,6 +18,7 @@
             @if(auth()->user()->role=='candidate')
                 {{auth()->user()->resume_url}}
                 <a href="{{asset('storage/documents/resumes/'. auth()->user()->candidate->resume_url)}}" class="text-red-400 font-bold">Download Resume</a>
+>>>>>>> c4b440931959f3fe81af478374ac416720e5628f
             @endif
         </div>
     </x-slot>
@@ -25,4 +32,8 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </x-app-layout>
+=======
+</x-app-layout>
+>>>>>>> c4b440931959f3fe81af478374ac416720e5628f

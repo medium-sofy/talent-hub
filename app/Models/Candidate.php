@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
 {
-    /** @use HasFactory<\Database\Factories\CandidateFactory> */
-    use HasFactory;
-
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'resume_url',
+        'linkedin_profile',
+        'phone_number',
+        'slug'
+    ];
 
     public function user()
     {

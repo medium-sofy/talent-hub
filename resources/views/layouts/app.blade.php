@@ -1,3 +1,5 @@
+<x-home.layout>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -15,22 +17,49 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
+    <style>
+        body {
+            background-color: #121212 !important;
+            color: #ffffff;
+        }
+        .bg-white {
+            background-color: #1E1E1E !important;
+            color: #ffffff;
+        }
+        .text-gray-600 {
+            color: #888 !important;
+        }
+        .bg-gray-100 {
+            background-color: #121212 !important;
+        }
+        .border {
+            border-color: #333 !important;
+        }
+        .text-gray-900 {
+            color: #ffffff !important;
+        }
+        .hover\:bg-gray-100:hover {
+            background-color: #1E1E1E !important;
+        }
+        .text-gray-500 {
+            color: #888 !important;
+        }
+        a {
+            color: #3498db !important;
+        }
+        a:hover {
+            color: #2980b9 !important;
+        }
+    </style>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Profile') }}
+        </h2>
+    </x-slot>            <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
         </div>
     </body>
 </html>
+</x-home.layout>

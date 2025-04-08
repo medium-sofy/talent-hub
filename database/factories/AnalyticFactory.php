@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\JobListing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\JobListing;
 /**
