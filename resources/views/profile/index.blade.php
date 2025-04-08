@@ -111,7 +111,7 @@
             </div>
             @if($user->candidate && $user->candidate->resume_url)
                 <a
-                    href="{{ asset('/storage/resumes/'.$user->candidate->resume_url) }}"
+                    href="{{ asset('/storage/documents/resumes/'.$user->candidate->resume_url) }}"
                     target="_blank"
                     download
                     class="btn btn-outline-primary px-4 py-2 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg transition duration-300 inline-flex items-center"

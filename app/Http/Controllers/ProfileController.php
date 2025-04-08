@@ -3,47 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-<<<<<<< HEAD
-=======
 use App\Models\Candidate;
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-<<<<<<< HEAD
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-=======
     public function edit(Request $request): View
     {
         $user = $request->user();
@@ -96,7 +66,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('resume')) {
             $resumeName = time() . '_' . $user->id . '.' . $request->resume->extension();
-            $request->resume->storeAs('', $resumeName, 'resumes');
+            $request->resume->storeAs('', $resumeName, 'candidate_resume');
             $candidateData['resume_url'] = $resumeName;
         }
 
@@ -104,17 +74,13 @@ class ProfileController extends Controller
             ['user_id' => $user->id],
             $candidateData
         );
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-<<<<<<< HEAD
     /**
      * Delete the user's account.
      */
-=======
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
@@ -122,23 +88,16 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-<<<<<<< HEAD
 
         Auth::logout();
 
         $user->delete();
 
-=======
-        Auth::logout();
-        $user->delete();
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
     }
-<<<<<<< HEAD
-=======
 
     public function show()
     {
@@ -153,5 +112,4 @@ class ProfileController extends Controller
         $user = $candidate->user;
         return view('profile.profile', compact('user', 'candidate'));
     }
->>>>>>> c4b440931959f3fe81af478374ac416720e5628f
 }
